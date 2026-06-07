@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; }
+
+body {
+  background: #0f1117;
+  color: #e2e8f0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  margin: 0;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #0f1117; }
+::-webkit-scrollbar-thumb { background: #2a3347; border-radius: 3px; }
+
+.signal-STRONG_BUY  { color: #00d084; }
+.signal-BUY         { color: #34d399; }
+.signal-NEUTRAL     { color: #94a3b8; }
+.signal-SELL        { color: #f87171; }
+.signal-STRONG_SELL { color: #ff4d4d; }
+
+.badge-STRONG_BUY  { background: #003d26; color: #00d084; }
+.badge-BUY         { background: #003d1a; color: #34d399; }
+.badge-NEUTRAL     { background: #1e2535; color: #94a3b8; }
+.badge-SELL        { background: #3d1010; color: #f87171; }
+.badge-STRONG_SELL { background: #3d0000; color: #ff4d4d; }
+
+.table-row { transition: background 0.1s; }
+.table-row:hover { background: #1e2535; }

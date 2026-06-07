@@ -1,0 +1,50 @@
+# render.yaml — Render.com deployment
+# Commit this to root of repo, then connect on render.com
+
+services:
+  # ─── Backend ───────────────────────────────────────────────────────────────
+  - type: web
+    name: nse-scanner-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: starter          # $7/mo — upgrade to standard for production
+    autoDeploy: true
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: nse-scanner-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          name: nse-scanner-redis
+          type: redis
+          property: connectionString
+      - key: ANTHROPIC_API_KEY
+        sync: false        # Set manually in Render dashboard
+      - key: DATA_FETCH_INTERVAL
+        value: "60"
+      - key: DEBUG
+        value: "false"
+      - key: CORS_ORIGINS
+        value: '["https://nse-scanner-frontend.onrender.com"]'
+
+  # ─── Frontend ──────────────────────────────────────────────────────────────
+  - type: web
+    name: nse-scanner-frontend
+    runtime: docker
+    dockerfilePath: ./frontend/Dockerfile
+    dockerContext: ./frontend
+    plan: starter
+    autoDeploy: true
+
+# ─── PostgreSQL ──────────────────────────────────────────────────────────────
+databases:
+  - name: nse-scanner-db
+    plan: starter          # $7/mo
+    databaseName: nse_scanner
+    user: nse
+
+# ─── Redis ───────────────────────────────────────────────────────────────────
+# Add Redis from Render dashboard: New → Redis → Free plan

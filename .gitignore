@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+fix_swing.py
+
+# Node
+node_modules/
+frontend/dist/
+.DS_Store
+
+# Docker
+docker/ssl/
+
+# Logs
+*.log
+backend/logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Local env
+.env.local
